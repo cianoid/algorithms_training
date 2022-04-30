@@ -1,28 +1,35 @@
 class StackMaxEffective:
     stack = []
-    max = 0
+    maxstack = []
+    max = None
 
     def __init__(self):
-        self.stack = []
-        self.max = None
+        self.maxstack.append(self.max)
 
     def is_empty(self):
         return len(self.stack) == 0
 
     def push(self, x):
+        if self.max is None or self.max <= x:
+            self.max = x
+            self.maxstack.append(self.max)
+
         self.stack.append(x)
 
     def pop(self):
-        try:
-            self.stack.pop()
-        except IndexError:
+        if self.is_empty():
+            self.max = None
+            self.maxstack = [self.max]
             print('error')
+            return
+
+        popped = self.stack.pop()
+        if popped == self.max:
+            self.maxstack.pop()
+            self.max = self.maxstack[-1]
 
     def get_max(self):
-        try:
-            print(max(self.stack))
-        except ValueError:
-            print('None')
+        print(self.max)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,155 @@
+154
+get_max
+push -8
+pop
+pop
+get_max
+pop
+pop
+get_max
+push -1
+get_max
+push -8
+get_max
+push 3
+get_max
+push 5
+push -1
+pop
+push -4
+pop
+pop
+get_max
+push 2
+pop
+pop
+push -6
+pop
+get_max
+push 4
+pop
+pop
+push -3
+pop
+pop
+get_max
+pop
+pop
+pop
+get_max
+push -2
+get_max
+push -3
+push 5
+get_max
+push -3
+push 1
+push 5
+pop
+pop
+pop
+get_max
+get_max
+push 9
+get_max
+push 7
+pop
+pop
+push 0
+push 8
+push -2
+pop
+get_max
+push -6
+push 9
+push 0
+get_max
+get_max
+pop
+pop
+push 3
+get_max
+get_max
+get_max
+push -5
+pop
+get_max
+push 4
+pop
+push -10
+pop
+get_max
+pop
+pop
+pop
+push -5
+get_max
+push 10
+get_max
+pop
+get_max
+get_max
+push -6
+get_max
+push -3
+push -9
+pop
+push 5
+push 6
+pop
+pop
+get_max
+push 1
+push -2
+push -10
+pop
+pop
+push 10
+pop
+push 6
+get_max
+push -1
+push -4
+push -10
+get_max
+push 3
+get_max
+pop
+get_max
+push -9
+get_max
+push -10
+get_max
+pop
+push -6
+pop
+push 10
+get_max
+get_max
+pop
+push -7
+get_max
+pop
+pop
+push -5
+push -7
+push 10
+get_max
+pop
+get_max
+get_max
+get_max
+push -7
+get_max
+push 2
+pop
+pop
+get_max
+get_max
+get_max
+push 2
+pop
+pop
+get_max
+push 6
+get_max
