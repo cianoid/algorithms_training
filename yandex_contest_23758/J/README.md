@@ -88,20 +88,26 @@ get
 
 ##### Ввод
 ```
-6
-put -66
-put 98
+9
+get
+size
+put 74
+get
+size
+put 90
 size
 size
-get
-get
+size
 ```
 
 ##### Вывод
 ```
-2
-2
--66
-98
+error
+0
+74
+0
+1
+1
+1
 ```
 
