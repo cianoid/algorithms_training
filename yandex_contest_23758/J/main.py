@@ -1,7 +1,15 @@
+class Node:
+    def __init__(self, x):
+        self.value = x
+        self.next = None
+
+    def __str__(self):
+        return str(self.value)
+
+
 class ConnectedQueue:
-    queue = []
-    tail = 0
-    head = 0
+    last = None
+    first = None
 
     def __init__(self):
         self.queue_size = 0
@@ -11,12 +19,20 @@ class ConnectedQueue:
             print('error')
             return
 
-        print(self.queue[self.head])
-        self.queue[self.head] = None
-        self.head += 1
+        print(self.first)
+        self.first = self.first.next
+        self.queue_size -= 1
 
     def put(self, x):
-        pass
+        current = Node(x)
+
+        if self.queue_size > 0:
+            self.last.next = current
+        else:
+            self.first = current
+
+        self.last = current
+        self.queue_size += 1
 
     def size(self):
         print(self.queue_size)
@@ -33,10 +49,10 @@ if __name__ == '__main__':
         func_name = command[0]
 
         if len(command) == 2:
-            print(f'>> {func_name}({command[1]})')
+            # print(f'>> {func_name}({command[1]})')
             getattr(queue, func_name)(int(command[1]))
         else:
-            print(f'>> {func_name}()')
+            # print(f'>> {func_name}()')
             getattr(queue, func_name)()
 
         command_count -= 1
