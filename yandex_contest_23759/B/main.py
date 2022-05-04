@@ -1,6 +1,10 @@
-#ID успешной посылки: 68060204
+#ID успешной посылки: 68078536
 
-class Calculator:
+class StackIsEmpty(Exception):
+    pass
+
+
+class Stack:
     def __init__(self):
         self.values = []
 
@@ -15,23 +19,26 @@ class Calculator:
         self.values.append(value)
 
     def get_result(self):
+        if len(self.values) == 0:
+            raise StackIsEmpty('Стек значений пуст. Выход из программы')
+
         return self.values.pop()
 
     def calculate(self, action):
         number1 = self.values.pop()
         number2 = self.values.pop()
 
-        if action == '+':
-            self.add_value(number2 + number1)
-        if action == '-':
-            self.add_value(number2 - number1)
-        if action == '*':
-            self.add_value(number2 * number1)
-        if action == '/':
-            self.add_value(number2 // number1)
+        actions = {
+            '+': lambda n1, n2: n2 + n1,
+            '-': lambda n1, n2: n2 - n1,
+            '*': lambda n1, n2: n2 * n1,
+            '/': lambda n1, n2: n2 // n1
+        }
+
+        self.add_value(actions[action](number1, number2))
 
 
 if __name__ == '__main__':
-    calc = Calculator()
+    calc = Stack()
     calc.add_expressions(input().split())
     print(calc.get_result())
