@@ -2,7 +2,7 @@
 
 https://contest.yandex.ru/contest/24734/problems/L/
 
-## A. Дек
+## L. Два велосипеда
 
 Ограничение времени - 0.5 секунды
 
