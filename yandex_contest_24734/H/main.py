@@ -1,20 +1,32 @@
-def combinations(count, arr, memo, results):
+import time
+
+
+def combinations(count, arr, memo, lenarr, maximum):
     for i in range(0, count):
-        cur = [arr.pop(i)]
+        if arr[i] is not None:
 
-        if len(arr) == 0:
-            results.append(int(''.join(memo + cur)))
+            cur = arr.pop(i)
+            lenarr -= 1
 
-        combinations(count-1, arr, memo + cur, results)
-        arr.insert(i, cur[0])
+            if lenarr == 0:
+                x = int(memo + cur)
+                if x > maximum:
+                    maximum = x
 
-    return results
+            maximum = combinations(
+                count - 1, arr, memo + cur, lenarr, maximum)
+            arr.insert(i, cur)
+            lenarr += 1
+
+    return maximum
 
 
 def big_number(number_count, numbers):
-    big_numbers = combinations(number_count, numbers, [], [])
+    t1 = time.time()
+    big_numbers = combinations(number_count, numbers, '', number_count, 0)
+    print('Elapsed {}ms'.format(round(1000 * (time.time() - t1))))
 
-    return max(big_numbers)
+    return big_numbers
 
 
 if __name__ == '__main__':
