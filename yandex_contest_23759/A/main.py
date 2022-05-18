@@ -1,5 +1,9 @@
 # ID посылки: 68004468
 
+class StackOverflow(Exception):
+    pass
+
+
 class Deque:
     def __init__(self, deque_max_size):
         self.deque_max_size = deque_max_size
@@ -8,16 +12,16 @@ class Deque:
         self.head = 0
         self.tail = 0
 
-    def __is_empty(self):
-        return self.deque_size == 0
+    def __exception_if_empty(self):
+        if self.deque_size == 0:
+            raise StackOverflow
 
-    def __is_full(self):
-        return self.deque_size == self.deque_max_size
+    def __exception_if_full(self):
+        if self.deque_size == self.deque_max_size:
+            raise StackOverflow
 
     def push_back(self, value):
-        if self.__is_full():
-            print('error')
-            return
+        self.__exception_if_full()
 
         self.deque[self.tail] = value
 
@@ -28,9 +32,7 @@ class Deque:
             self.tail = 0
 
     def push_front(self, value):
-        if self.__is_full():
-            print('error')
-            return
+        self.__exception_if_full()
 
         self.head -= 1
         if self.head < 0:
@@ -40,11 +42,9 @@ class Deque:
         self.deque_size += 1
 
     def pop_front(self):
-        if self.__is_empty():
-            print('error')
-            return
+        self.__exception_if_empty()
 
-        print(self.deque[self.head])
+        result = self.deque[self.head]
 
         self.deque[self.head] = None
         self.head += 1
@@ -53,18 +53,20 @@ class Deque:
         if self.head == self.deque_max_size:
             self.head = 0
 
+        return result
+
     def pop_back(self):
-        if self.__is_empty():
-            print('error')
-            return
+        self.__exception_if_empty()
 
         self.tail -= 1
         if self.tail < 0:
             self.tail = self.deque_max_size - 1
 
-        print(self.deque[self.tail])
+        result = self.deque[self.tail]
         self.deque[self.tail] = None
         self.deque_size -= 1
+
+        return result
 
 
 if __name__ == '__main__':
@@ -73,13 +75,19 @@ if __name__ == '__main__':
     queue = Deque(int(input()))
 
     while command_count > 0:
-        command = input().split()
+        try:
+            command = input().split()
+            func_name = command[0]
 
-        func_name = command[0]
+            if len(command) == 2:
+                func_result = getattr(queue, func_name)(int(command[1]))
+            else:
+                func_result = getattr(queue, func_name)()
 
-        if len(command) == 2:
-            getattr(queue, func_name)(int(command[1]))
-        else:
-            getattr(queue, func_name)()
+            if func_result is not None:
+                print(func_result)
+
+        except StackOverflow:
+            print('error')
 
         command_count -= 1
