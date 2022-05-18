@@ -1,9 +1,14 @@
+def get_total_gardenbeds(gardenbeds):
+    pass
+
+
 if __name__ == '__main__':
-    gardener = int(input())
+    inp_gardener_count = int(input())
 
-    gardenbed = []
+    inp_gardenbeds = []
 
-    for i in range(gardener):
-        gardenbed.append([int(x) for x in input().split()])
+    for i in range(inp_gardener_count):
+        inp_gardenbeds.append([int(x) for x in input().split()])
 
-    print(gardenbed)
+    for rb in get_total_gardenbeds(inp_gardenbeds):
+        print(rb)
