@@ -6,13 +6,26 @@ def is_subsubsequence(s, t):
         return False
 
     last_index = -1
+    len_s = len(s)
+    len_t = len(t)
+    counter = 0
+
     for letter in s:
-        try:
-            last_index = t.index(letter, last_index + 1)
-        except ValueError:
+        counter += 1
+
+        prev_index = last_index
+        for index in range(last_index + 1, len_t):
+            if t[index] == letter:
+                if len_s == counter:
+                    return True
+
+                last_index = index
+                break
+
+        if prev_index == last_index:
             return False
 
-    return True
+    return False
 
 
 if __name__ == '__main__':
