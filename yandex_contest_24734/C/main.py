@@ -1,29 +1,18 @@
 def is_subsubsequence(s, t):
-    if s == '':
+    if len(s) == 0:
         return True
 
-    if t == '':
+    if len(t) == 0:
         return False
 
-    last_index = -1
-    len_s = len(s)
-    len_t = len(t)
     counter = 0
 
-    for letter in s:
-        counter += 1
+    for letter_2 in t:
+        if letter_2 == s[counter]:
+            counter += 1
 
-        prev_index = last_index
-        for index in range(last_index + 1, len_t):
-            if t[index] == letter:
-                if len_s == counter:
-                    return True
-
-                last_index = index
-                break
-
-        if prev_index == last_index:
-            return False
+            if counter == len(s):
+                return True
 
     return False
 
