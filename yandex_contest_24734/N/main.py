@@ -66,9 +66,44 @@ def merge_sort(array):
     return result
 
 
+def partition(array, pivot):
+    left = [None] * len(array)
+    center = left.copy()
+    right = left.copy()
+
+    len_left = 0
+    len_center = 0
+    len_right = 0
+
+    for element in array:
+
+        if element < pivot:
+            left[len_left] = element
+            len_left += 1
+        elif element == pivot:
+            center[len_center] = element
+            len_center += 1
+        else:
+            right[len_right] = element
+            len_right += 1
+
+    return left[:len_left], center[:len_center], right[:len_right]
+
+
+def quick_sort(array):
+    if len(array) < 2:
+        return array
+
+    pivot = array[len(array) // 2]
+    left, center, right = partition(array, pivot)
+
+    return quick_sort(left) + center + quick_sort(right)
+
+
 def get_total_gardenbeds(gardenbeds, gardener_count):
     # gardenbeds = merge_sort(gardenbeds)
-    gardenbeds = sorted(gardenbeds)
+    # gardenbeds = sorted(gardenbeds)
+    gardenbeds = quick_sort(gardenbeds)
 
     garden = []
 
