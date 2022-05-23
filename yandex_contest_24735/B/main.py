@@ -1,44 +1,50 @@
-# ID посылки:
+# ID посылки: 68565904
 
 def get_element_index(element):
-    return tuple([-element[1], element[2], element[0]])
+    return [-element[1], element[2], element[0]]
 
 
-def partition(participants, pivot):
-    left = [None] * len(participants)
-    center = left.copy()
-    right = left.copy()
+def effective_partition(participants, pivot, len_participants):
+    if len_participants == 1:
+        return participants
 
-    len_left = 0
-    len_center = 0
-    len_right = 0
+    index_pivot = get_element_index(pivot)
 
-    pivot_index = get_element_index(pivot)
+    pointer_left = 0
+    pointer_right = len_participants - 1
 
-    for element in participants:
-        element_index = get_element_index(element)
+    while True:
+        index_left = get_element_index(participants[pointer_left])
+        index_right = get_element_index(participants[pointer_right])
 
-        if element_index < pivot_index:
-            left[len_left] = element
-            len_left += 1
-        elif element_index > pivot_index:
-            right[len_right] = element
-            len_right += 1
-        else:
-            center[len_center] = element
-            len_center += 1
+        if index_left < index_pivot:
+            pointer_left += 1
 
-    return left[:len_left], center[:len_center], right[:len_right]
+        if index_right > index_pivot:
+            pointer_right -= 1
+
+        if index_right <= index_pivot <= index_left:
+            swap = participants[pointer_right]
+            participants[pointer_right] = participants[pointer_left]
+            participants[pointer_left] = swap
+
+        if pointer_left >= pointer_right:
+            break
+
+    return participants[0:pointer_left], participants[pointer_left:]
 
 
 def effective_quick_sort(participants):
-    if len(participants) < 2:
+    len_participants = len(participants)
+
+    if len_participants < 2:
         return participants
 
-    pivot = participants[len(participants) // 2]
-    left, center, right = partition(participants, pivot)
+    pivot = participants[len_participants // 2]
 
-    return effective_quick_sort(left) + center + effective_quick_sort(right)
+    left, right = effective_partition(participants, pivot, len_participants)
+
+    return effective_quick_sort(left) + effective_quick_sort(right)
 
 
 if __name__ == '__main__':
@@ -47,9 +53,8 @@ if __name__ == '__main__':
 
     for i in range(inp_participant_count):
         inp_participants.append(
-            tuple([
-                int(param) if param.isdigit() else param
-                for param in input().split()]))
+            [int(param) if param.isdigit() else param
+             for param in input().split()])
 
     for participant in effective_quick_sort(inp_participants):
         print(participant[0])
