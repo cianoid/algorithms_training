@@ -1,6 +1,8 @@
-# ID посылки: 68552747
+# ID посылки: 68569931
 
-def broken_search(nums, target, start=None, end=None) -> int:
+def broken_search(
+        nums: list, target: int, start: [int, None] = None,
+        end: [int, None] = None) -> int:
     # задаем границы массива при первом запуске
     if start is None or end is None:
         start, end = 0, len(nums)

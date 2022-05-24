@@ -1,10 +1,12 @@
-# ID посылки: 68565904
+# ID посылки: 68569924
 
-def get_element_index(element):
+def get_element_index(element: list) -> list:
     return [-element[1], element[2], element[0]]
 
 
-def effective_partition(participants, pivot, len_participants):
+def effective_partition(
+        participants: list, pivot: list,
+        len_participants: int) -> (list, list):
     if len_participants == 1:
         return participants
 
@@ -34,7 +36,7 @@ def effective_partition(participants, pivot, len_participants):
     return participants[0:pointer_left], participants[pointer_left:]
 
 
-def effective_quick_sort(participants):
+def effective_quick_sort(participants: list) -> list:
     len_participants = len(participants)
 
     if len_participants < 2:
